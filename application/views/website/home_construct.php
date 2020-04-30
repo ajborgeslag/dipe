@@ -1,0 +1,2 @@
+<div style="margin:40px auto;"><h1 style="text-align:center;">Dipepsa</h1></div>
+<div style="max-width:500px;margin:20px auto;text-aligth:center;"><img style="width:100%;" src="mantenimiento.png"></div>
