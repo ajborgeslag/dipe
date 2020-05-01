@@ -438,6 +438,8 @@ class Home extends CI_Controller {
 	//Account info save
 	public function account_info_save($account_id){
 
+		$cash_name  = $this->input->post('cash_name');
+		$cash_phone  = $this->input->post('cash_phone');
         $payment_details  = $this->input->post('payment_details');
         $customer_variant  = $this->input->post('customer_variant');
         $payment_method  = $this->input->post('payment_method');
@@ -479,6 +481,8 @@ class Home extends CI_Controller {
             array(
                 'account_info' => $account_id,
                 'customer_variant' => $customer_variant,
+                'cash_name' => $cash_name,
+                'cash_phone' => $cash_phone,
                 //'customer_name' => $customer_name,
                 'customer_phone_number' => $customer_phone_number,
                 'customer_street' => $customer_street,
@@ -1113,6 +1117,24 @@ class Home extends CI_Controller {
                     redirect('/checkout');
                 }
 			}
+			else if ($payment_method == 8) {
+                $store_id = $this->session->userdata('store_id');
+                $this->load->model('Stores');
+				$store = $this->Stores->store_search_item($this->session->userdata('store_id'));
+				//die($this->session->userdata('cash_name'));
+				$return_order_id = $this->Homes->order_entry($customer_id, $order_id, $store_id);
+				$this->Homes->pagar_order($return_order_id);
+				$order = $this->lorder->order_by_id($return_order_id);
+				$html = $this->generate_html($order);
+
+				$this->Settings->send_mail($email, 'Confirmación de Orden de Compra', $html);
+				$this->cart->destroy();
+                $this->session->unset_userdata('token');
+                $this->session->set_userdata('message','Su compra fue efectuada satisfactoriamente. Pasa a recoger: Nombre '.$this->session->userdata('cash_name').' y teléfono '.$this->session->userdata('cash_phone').' a la tienda '.$store['store_name'].' '.$store['store_address']);
+                redirect('/customer/order/manage_order');
+            }
+			
+
         }
         else
         {

@@ -196,7 +196,7 @@
                         <div class="row">
                             <?php if($variante_entrega=="1"){ ?>
                                 <div class="col-sm-12">
-                                    <h3 class="text-center">El cliente pasa a recoger el producto</h3>
+                                    <h3 class="text-center">El cliente {customer_cash_name} con No. de teléfono {customer_cash_phone} pasa a recoger el producto</h3>
                                 </div>
                             <?php } else { ?>
                                 <div class="col-sm-12">

@@ -214,6 +214,10 @@ class Corder extends CI_Controller {
         $order_id = $this->input->post('order_id');
         $data = array();
         $data['order_state_id'] = $order_state;
+        if($order_state=='5')
+        {
+        	$data['pagado'] = '1';
+        }
         $CI =& get_instance();
         $CI->load->model('Orders');
         $CI->load->model('website/Settings');

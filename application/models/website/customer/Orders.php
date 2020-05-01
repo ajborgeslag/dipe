@@ -17,7 +17,8 @@ class Orders extends CI_Model {
         $this->db->join('order_state o','o.id = a.order_state_id');
 		$this->db->join('store_set s','s.store_id = a.store_id');
 		$this->db->where('b.customer_id',$customer_id);
-        $this->db->where('a.pagado',1);
+        //$this->db->where('a.pagado',1);
+        $this->db->where('a.metodo_pago',8);
 		$this->db->order_by('a.order','desc');
 		$query = $this->db->get();
 		if ($query->num_rows() > 0) {

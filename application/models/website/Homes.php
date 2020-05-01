@@ -502,6 +502,8 @@ class Homes extends CI_Model {
                 'variante_entrega' 	=> 	$this->session->userdata('customer_variant'),
                 'amount_cost_send' => $amount_cost_send,
                 'forma_pago' => $this->session->userdata('fac_fp'),
+                'customer_cash_name' => $this->session->userdata('cash_name'),
+                'customer_cash_phone' => $this->session->userdata('cash_phone'),
             );
 			$this->db->insert('order',$data);
 
@@ -735,14 +737,35 @@ class Homes extends CI_Model {
 
 	public function pagar_order($order_id)
     {
-        $order = $this->number_generator_order();
-        $data = array(
-            'order' => $order,
-            'pagado' => 1
-        );
-
+    	$this->db->select('*');
+        $this->db->from('order');
         $this->db->where('order_id',$order_id);
-        $this->db->update('order',$data);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $order = $query->result_array();
+            if($order[0]['metodo_pago']=='8')
+            {
+        		$order = $this->number_generator_order();
+		        $data = array(
+		            'order' => $order
+		        );
+
+		        $this->db->where('order_id',$order_id);
+		        $this->db->update('order',$data);    	
+            }
+            else
+            {
+            	$order = $this->number_generator_order();
+		        $data = array(
+		            'order' => $order,
+		            'pagado' => 1
+		        );
+
+		        $this->db->where('order_id',$order_id);
+		        $this->db->update('order',$data);
+            }
+        }
+        
 
         return true;
 
@@ -784,6 +807,8 @@ class Homes extends CI_Model {
         return $order_no;*/
 
 	}
+
+
 
 	//Retrive all language
 	public function languages()

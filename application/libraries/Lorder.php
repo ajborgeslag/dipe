@@ -462,6 +462,8 @@ class Lorder {
             'customer_id'		=>	$order_detail[0]['customer_id'],
             'store_id'			=>	$order_detail[0]['store_id'],
             'customer_name'		=>	$order_detail[0]['customer_name'],
+            'customer_cash_name'		=>	$order_detail[0]['customer_cash_name'],
+            'customer_cash_phone'		=>	$order_detail[0]['customer_cash_phone'],
             'date'				=>	$CI->occational->dateConvert($order_detail[0]['date']),
             'total_amount'		=>	$order_detail[0]['total_amount'],
             'paid_amount'		=>	$order_detail[0]['paid_amount'],

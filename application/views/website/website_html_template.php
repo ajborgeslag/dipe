@@ -402,7 +402,7 @@
        }
    }
 
-    window.addEventListener('scroll',resizeHeaderOnScroll);
+   /* window.addEventListener('scroll',resizeHeaderOnScroll);*/
 
 
     </script>

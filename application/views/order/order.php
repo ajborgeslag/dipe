@@ -59,6 +59,8 @@
 										<th><?php echo display('order_no') ?></th>
 										<th><?php echo "Tienda"; ?></th>
 										<th><?php echo display('customer_name') ?></th>
+										<th>Nombre de quien pasa a recoger</th>
+										<th>Teléfono de quien pasa a recoger</th>
 										<th><?php echo display('date') ?></th>
 										<th><?php echo display('total_amount') ?></th>
 										<th><?php echo 'Variante'; ?></th>
@@ -77,6 +79,8 @@
                                             <td><?php echo $order['order']?></td>
 											<td><?php echo $order['store_name']?></td>
                                             <td><a href="<?php echo base_url().'Ccustomer/customer_update_form/'.$order['customer_id']; ?>"><?php echo $order['customer_name']?></a></td>
+                                            <td><?php echo $order['customer_cash_name']?></td>
+                                            <td><?php echo $order['customer_cash_phone']?></td>
                                             <td><?php echo $order['final_date']?></td>
 											<td style="text-align: right;"><?php echo (($position==0)?$currency.' '.$order['total_amount']:$order['total_amount'].' '.$currency) ?></td>
 											<td><?php $state = '';
@@ -126,6 +130,8 @@
                                                     <td><?php echo $order['order']?></td>
 													<td><?php echo $order['store_name']?></td>
                                                     <td><a href="<?php echo base_url().'Ccustomer/customer_update_form/'.$order['customer_id']; ?>"><?php echo $order['customer_name']?></a></td>
+                                                    <td><?php echo $order['customer_cash_name']?></td>
+                                            		<td><?php echo $order['customer_cash_phone']?></td>
                                                     <td><?php echo $order['final_date']?></td>
 													<td style="text-align: right;"><?php echo (($position==0)?$currency.' '.$order['total_amount']:$order['total_amount'].' '.$currency) ?></td>
 													<td><?php $state = '';

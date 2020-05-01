@@ -65,7 +65,7 @@ if ($this->cart->contents()) { ?>
                     <div class="wizard_inner">
                         <div id="step-1">
                             <div class="row justify-content-center mt-2">
-                                <div class="p-xs-0 p-sm-0 p-md-2 p-lg-2 col-lg-6 ">
+                                <div class="p-xs-0 p-sm-0 p-md-2 p-lg-2 col-lg-3 ">
                                     <div id="select-step-0" role="form" data-toggle="validator" >
                                         <div class="form-group p-2">
                                             <input type="hidden" name="customer_email" value="<?php echo $this->session->userdata('customer_email'); ?>"/>
@@ -75,6 +75,24 @@ if ($this->cart->contents()) { ?>
                                                 <option value="1">Paso a recoger</option>
                                                 <!--<option value="2">Enviar a domicilio</option>-->
                                             </select>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-xs-0 p-sm-0 p-md-2 p-lg-2 col-lg-3 ">
+                                    <div id="form-row-cash-name-step-0" role="form" data-toggle="validator" >
+                                        <div class="form-group p-2">
+                                            <h6 class="dipe-h6"> Nombre <i class="text-danger">*</i></h6>
+                                            <input id="cash_name"  class="form-control" type="text" name="cash_name" required data-required-error="Campo obligatorio."/>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-xs-0 p-sm-0 p-md-2 p-lg-2 col-lg-3 ">
+                                    <div id="form-row-cash-phone-step-0" role="form" data-toggle="validator" >
+                                        <div class="form-group p-2">
+                                            <h6 class="dipe-h6"> No. de Teléfono <i class="text-danger">*</i></h6>
+                                            <input id="cash_phone" class="form-control" type="text" name="cash_hpne" required data-required-error="Campo obligatorio."/>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -285,9 +303,17 @@ if ($this->cart->contents()) { ?>
                                 <div id="form-step-1" role="form" data-toggle="validator" class="step3_inner box mt-5 mb-5">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <div class="radio">
+                                            <!--<div class="radio">
                                                 <label>
                                                     <input type="radio" name="payment_method" value="4"  checked="checked" >
+                                                    <img src="<?php echo base_url('my-assets/image/payeer.png')?>">
+                                                    <img src="<?php echo base_url('my-assets/image/master_card.png')?>">
+                                                    <img src="<?php echo base_url('my-assets/image/visa.png')?>">
+                                                </label>
+                                            </div>-->
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="payment_method" value="8"  checked="checked" >
                                                     <img src="<?php echo base_url('my-assets/image/payeer.png')?>">
                                                     <img src="<?php echo base_url('my-assets/image/master_card.png')?>">
                                                     <img src="<?php echo base_url('my-assets/image/visa.png')?>">
@@ -487,6 +513,8 @@ if ($this->cart->contents()) { ?>
 <script type="text/javascript">
     //Retrive district
     $('body').delegate('.sw-btn-next', 'click', function() {
+        var cash_name = $('#cash_name').val();
+        var cash_phone = $('#cash_phone').val();
         var customer_variant = $('#customer_variant').val();
         var customer_name      = $('#customer_name').val();
         var customer_street      = $('#customer_street').val();
@@ -509,6 +537,8 @@ if ($this->cart->contents()) { ?>
             type: "post",
             url: '<?php echo base_url('website/Home/account_info_save/')?>' + '1'/*$('input[name=\'account\']:checked').val()*/,
             data: {
+                cash_name:cash_name,
+                cash_phone:cash_phone,
                 customer_variant:customer_variant,
                 customer_name : customer_name,
                 customer_street : customer_street,
@@ -683,26 +713,32 @@ if ($this->cart->contents()) { ?>
             {
 
                 var selectForm = $("#select-step-0");
+                var formInputName = $("#form-row-cash-name-step-0");
+                var formInputPhone = $("#form-row-cash-phone-step-0");
                 var formRow1 = $("#form-row1-step-0");
                 var formRow2 = $("#form-row2-step-0");
                 var formRow3 = $("#form-row3-step-0");
                 var formRow4 = $("#form-row4-step-0");
                 var formRow5 = $("#form-row5-step-0");
-                if(stepDirection === 'forward' && selectForm && formRow1 && formRow2 && formRow3 && formRow4 && formRow5){
+                if(stepDirection === 'forward' && selectForm && formRow1 && formRow2 && formRow3 && formRow4 && formRow5 && formInputName && formInputPhone){
                     selectForm.validator('validate');
                     formRow1.validator('validate');
                     formRow2.validator('validate');
                     formRow3.validator('validate');
                     formRow4.validator('validate');
                     formRow5.validator('validate');
+                    formInputName.validator('validate');
+                    formInputPhone.validator('validate');
                     var selectFormError = selectForm.children('.has-error');
                     var formRow1Error = formRow1.children('.has-error');
                     var formRow2Error = formRow2.children('.has-error');
                     var formRow3Error = formRow3.children('.has-error');
                     var formRow4Error = formRow4.children('.has-error');
                     var formRow5Error = formRow5.children('.has-error');
+                    var formInputNameError = formInputName.children('.has-error');
+                    var formInputPhoneError = formInputPhone.children('.has-error');
 
-                    if(selectFormError.length > 0 || formRow1Error.length >0 || formRow2Error.length >0 || formRow3Error.length >0 || formRow4Error.length >0 || formRow5Error.length >0){
+                    if(formInputNameError.length > 0 || formInputPhoneError.length >0 || selectFormError.length > 0 || formRow1Error.length >0 || formRow2Error.length >0 || formRow3Error.length >0 || formRow4Error.length >0 || formRow5Error.length >0){
                         // Form validation failed
                         return false;
                     }
