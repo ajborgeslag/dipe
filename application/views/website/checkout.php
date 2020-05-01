@@ -302,7 +302,7 @@ if ($this->cart->contents()) { ?>
                             <div class="row justify-content-center mt-5">
                                 <div id="form-step-1" role="form" data-toggle="validator" class="step3_inner box mt-5 mb-5">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-5">
                                             <!--<div class="radio">
                                                 <label>
                                                     <input type="radio" name="payment_method" value="4"  checked="checked" >
@@ -314,9 +314,7 @@ if ($this->cart->contents()) { ?>
                                             <div class="radio">
                                                 <label>
                                                     <input type="radio" name="payment_method" value="8"  checked="checked" >
-                                                    <img src="<?php echo base_url('my-assets/image/payeer.png')?>">
-                                                    <img src="<?php echo base_url('my-assets/image/master_card.png')?>">
-                                                    <img src="<?php echo base_url('my-assets/image/visa.png')?>">
+                                                    <img src="<?php echo base_url('my-assets/image/pay_cash.png')?>">
                                                 </label>
                                             </div>
                                         </div>
