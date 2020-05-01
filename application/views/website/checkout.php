@@ -83,7 +83,7 @@ if ($this->cart->contents()) { ?>
                                     <div id="form-row-cash-name-step-0" role="form" data-toggle="validator" >
                                         <div class="form-group p-2">
                                             <h6 class="dipe-h6"> Nombre <i class="text-danger">*</i></h6>
-                                            <input id="cash_name"  class="form-control" type="text" name="cash_name" required data-required-error="Campo obligatorio."/>
+                                            <input id="cash_name"   class="form-control" type="text" name="cash_name" required data-required-error="Campo obligatorio."/>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@ if ($this->cart->contents()) { ?>
                                     <div id="form-row-cash-phone-step-0" role="form" data-toggle="validator" >
                                         <div class="form-group p-2">
                                             <h6 class="dipe-h6"> No. de Teléfono <i class="text-danger">*</i></h6>
-                                            <input id="cash_phone" class="form-control" type="text" name="cash_hpne" required data-required-error="Campo obligatorio."/>
+                                            <input id="cash_phone" data-minlength-error="Mínimo 8 números" data-minlength="8"  class="form-control" pattern="^[0-9]*$" data-pattern-error="Solo números" maxlength="10" type="text" name="cash_hpne" required data-required-error="Campo obligatorio."/>
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -507,7 +507,6 @@ if ($this->cart->contents()) { ?>
     </div>
 </section>
 
-
 <script type="text/javascript">
     //Retrive district
     $('body').delegate('.sw-btn-next', 'click', function() {
@@ -704,6 +703,17 @@ if ($this->cart->contents()) { ?>
                 enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
             }
         });
+
+        /*$('#cash_phone').on('change keydown',function(){
+            console.log($(this).val());
+            var string = $(this).val(); 
+            //var a = 
+            if( string.length > 11)
+            {
+                console.log('aqui');
+                $('#cash_phone').val(string.substring(0,9));   
+            }
+        });*/
 
         $("#wizard_form").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
 
