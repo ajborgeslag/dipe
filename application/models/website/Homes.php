@@ -774,8 +774,8 @@ class Homes extends CI_Model {
 	//NUMBER GENERATOR FOR ORDER
 	public function number_generator_order()
 	{
-		$this->db->select_max('order', 'order_no')
-            ->where('pagado',1);
+		$this->db->select_max('order', 'order_no');
+            /*->where('pagado',1);*/
 		$query = $this->db->get('order');	
 		$result = $query->result_array();	
 		$order_no = $result[0]['order_no'];

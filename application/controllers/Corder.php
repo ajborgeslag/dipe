@@ -217,6 +217,7 @@ class Corder extends CI_Controller {
         if($order_state=='5')
         {
         	$data['pagado'] = '1';
+        	$data['date_only'] = date("m-d-Y");
         }
         $CI =& get_instance();
         $CI->load->model('Orders');
